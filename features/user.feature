@@ -1,6 +1,6 @@
 Feature: User
 
-  Scenario: post, get, delete new user
+  Scenario: POST, GET, DELETE new user
     {User} Given the user specified in <file> does not exist
     {User} Then I can POST the user specified in <file> and get HTTP status code <http_post_status>
     {User} And I can GET the user specified in <file>
