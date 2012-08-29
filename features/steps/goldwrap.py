@@ -28,7 +28,7 @@ class GoldWrap:
     body = conn.getresponse().read()
     return json.loads(body)
 
-  def create_user(self, user):
+  def post_user(self, user):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/users' % (self._basepath))
     conn.request('POST', path, body=json.dumps(user), headers=self._headers)
