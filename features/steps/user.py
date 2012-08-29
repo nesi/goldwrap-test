@@ -9,7 +9,7 @@ def USER_verify_user_not_exists(step, user_file):
   for u in users:
     assert user['userId'] != u['userId']
   
-@step('{User} Then I can create the user specified in (.*) and get the status code (.*)')
+@step('{User} Then I can create the user specified in (.*) and get HTTP status code (.*)')
 def USER_create_user(step, user_file, CREATE_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.create_user(user)
@@ -27,13 +27,13 @@ def USER_get_user(step, user_file):
     assert u[key] == user[key]
     
 
-@step('{User} And I can DELETE the user specified in (.*) and get the status code (.*)')
+@step('{User} And I can DELETE the user specified in (.*) and get HTTP status code (.*)')
 def USER_delete_user(step, user_file, DELETE_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   status = world.goldwrap.delete_user(user['userId'])
   assert str(DELETE_status) == str(status)
   
-@step('{User} And I cannot create another user specified in (.*) and get the status code (.*)')
+@step('{User} And I cannot create another user specified in (.*) and get HTTP status code (.*)')
 def USER_verify_failure_for_duplicate_user(step, user_file, ERROR_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.create_user(user)
