@@ -1,0 +1,15 @@
+{
+  'address'         : '24 Symonds Street', 
+  'altEmail'        : 'test2@nesi.org.nz',
+  'department'      : 'Centre for eResearch',
+  'email'           : 'test@nesi.org.nz',
+  'firstName'       : 'Richard',
+  'institution'     : 'The University of Auckland',
+  'lastName'        : 'Researcher',
+  'middleName'      : 'Reginald',
+  'nationality'     : 'Kiwi',
+  'phone'           : '12345',
+  'position'        : 'Dummy',
+  'preferredClient' : 'Dunno',
+  'userId'          : 'testuser',
+}  
