@@ -14,7 +14,7 @@ Feature: User
   Scenario: Verify that creating the same user twice fails
     {User} Given the user specified in <user_file> does not exist
     {User} Then I can create the user specified in <user_file> and get the status code <create_status>
-    {User} I cannot create another user specified in <user_file> and get the status code <error_status>
+    {User} And I cannot create another user specified in <user_file> and get the status code <error_status>
     {User} And I can DELETE the user specified in <user_file> and get the status code <delete_status> 
 
     Examples:

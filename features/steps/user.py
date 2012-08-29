@@ -33,7 +33,7 @@ def USER_delete_user(step, user_file, DELETE_status):
   status = world.goldwrap.delete_user(user['userId'])
   assert str(DELETE_status) == str(status)
   
-@step('{User} I cannot create another user specified in (.*) and get the status code (.*)')
+@step('{User} And I cannot create another user specified in (.*) and get the status code (.*)')
 def USER_verify_failure_for_duplicate_user(step, user_file, ERROR_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.create_user(user)
