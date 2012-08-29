@@ -1,0 +1,15 @@
+{
+  'address'         : '24 Symonds Street', 
+  'altEmail'        : 'automatedtestuser2b@nesi.org.nz',
+  'department'      : 'Testing department',
+  'email'           : 'automatedtestuser2a@nesi.org.nz',
+  'firstName'       : 'Todd',
+  'institution'     : 'NIWA',
+  'lastName'        : 'Tester',
+  'middleName'      : 'Tony',
+  'nationality'     : 'Kiwi',
+  'phone'           : '54321',
+  'position'        : 'Tester',
+  'preferredClient' : 'automated test clients',
+  'userId'          : 'automatedtestuser2',
+}  

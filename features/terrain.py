@@ -13,5 +13,7 @@ TIMEOUT = 20
 @before.all
 def init():
   world.goldwrap = GoldWrap(GOLDWRAP_PROTOCOL, GOLDWRAP_HOST, GOLDWRAP_PORT, GOLDWRAP_BASE_PATH, TIMEOUT)
-  u = eval(open(util.find_path_for_file('user_001.dict')).read())
-  world.goldwrap.delete_user(u['userId'])
+  u1 = eval(open(util.find_path_for_file('user_001.dict')).read())
+  u2 = eval(open(util.find_path_for_file('user_002.dict')).read())
+  world.goldwrap.delete_user(u1['userId'])
+  world.goldwrap.delete_user(u2['userId'])

@@ -1,8 +1,8 @@
 {
   'address'         : '24 Symonds Street', 
-  'altEmail'        : 'automatedtests2@nesi.org.nz',
+  'altEmail'        : 'automatedtestuser1b@nesi.org.nz',
   'department'      : 'Centre for eResearch',
-  'email'           : 'automatedtests@nesi.org.nz',
+  'email'           : 'automatedtestuser1a@nesi.org.nz',
   'firstName'       : 'Thomas',
   'institution'     : 'The University of Auckland',
   'lastName'        : 'Tester',
@@ -11,5 +11,5 @@
   'phone'           : '12345',
   'position'        : 'Tester',
   'preferredClient' : 'automated test clients',
-  'userId'          : 'automatedtestuser',
+  'userId'          : 'automatedtestuser1',
 }  
