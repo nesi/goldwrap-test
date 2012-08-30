@@ -1,5 +1,6 @@
 {
-  'address'         : '24 Symonds Street', 
+  'address'         : '23 Scott Street', 
+  'affiliation'     : 'NIWA',
   'altEmail'        : 'automatedtestuser2b@nesi.org.nz',
   'department'      : 'Testing department',
   'email'           : 'automatedtestuser2a@nesi.org.nz',

@@ -1,1 +1,3 @@
-* perhaps change status code upon POST from 204 to 201
+* perhaps change status code upon successful user creation from 204 to 201
+* perhaps change status code upon successful project creation from 200 to 201 (or at least make it consistent with user creation)
+* return the created user object upon creation of a user, just like it's done with projects

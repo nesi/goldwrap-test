@@ -17,55 +17,100 @@ class GoldWrap:
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/users' % (self._basepath))
     conn.request('GET', path, headers=self._headers)
-    body = conn.getresponse().read()
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
     conn.close()
-    return json.loads(body)
+    return (status, body)
 
   def get_user(self, user_id):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/users/%s' % (self._basepath, user_id))
     conn.request('GET', path, headers=self._headers)
-    body = conn.getresponse().read()
-    return json.loads(body)
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status, body)
 
-  def post_user(self, user):
+  def create_user(self, user):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/users' % (self._basepath))
     conn.request('POST', path, body=json.dumps(user), headers=self._headers)
     resp = conn.getresponse()
     status = resp.status
     body = resp.read()
-    return (status,body)
+    return (status, body)
 
+  def update_user(self, user):
+    conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
+    path = quote('%s/users/%s' % (self._basepath, user['userId']))
+    conn.request('POST', path, body=json.dumps(user), headers=self._headers)
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
+      
   def delete_user(self, user_id):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/users/%s' % (self._basepath, user_id))
     conn.request('DELETE', path, headers=self._headers)
-    status = conn.getresponse().status
-    conn.close()
-    return status
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
         
   def get_projects(self):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/projects' % (self._basepath))
     conn.request('GET', path, headers=self._headers)
-    body = conn.getresponse().read()
-    conn.close()
-    return json.loads(body)
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
+
+  def get_projects_of_principal(self, principal):
+    conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
+    path = quote('%s/users/%s/principal' % (self._basepath, principal))
+    conn.request('GET', path, headers=self._headers)
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
     
   def get_project(self, project_id):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/projects/%s' % (self._basepath, project_id))
     conn.request('GET', path, headers=self._headers)
-    body = conn.getresponse().read()
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
     conn.close()
-    return json.loads(body)
+    return (status,body)
 
+  def create_project(self, project):
+    conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
+    path = quote('%s/projects' % (self._basepath))
+    conn.request('POST', path, body=json.dumps(project), headers=self._headers)
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
+
+  def update_project(self, project):
+    conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
+    path = quote('%s/projects/%s' % (self._basepath, project['projectId']))
+    conn.request('POST', path, body=json.dumps(project), headers=self._headers)
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
+      
   def delete_project(self, project_id):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/projects/%s' % (self._basepath, project_id))
     conn.request('DELETE', path, headers=self._headers)
-    status = conn.getresponse().status
-    conn.close()
-    return status
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
     

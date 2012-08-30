@@ -1,5 +1,6 @@
 {
-  'address'         : '24 Symonds Street', 
+  'address'         : '24 Symonds Street',
+  'affiliation'     : 'UoA',
   'altEmail'        : 'automatedtestuser1b@nesi.org.nz',
   'department'      : 'Centre for eResearch',
   'email'           : 'automatedtestuser1a@nesi.org.nz',

@@ -1,22 +1,79 @@
 Feature: User
 
-  Scenario: POST, GET, DELETE new user
-    {User} Given the user specified in <file> does not exist
-    {User} Then I can POST the user specified in <file> and get HTTP status code <http_post_status>
-    {User} And I can GET the user specified in <file>
-    {User} And I can DELETE the user specified in <file> and get HTTP status code <http_delete_status> 
+  Scenario: Create new user
+  
+    {User} Given the user <user> does not exist
+    {User} Then I can create the user <user> and the HTTP status code is <http_status>
 
     Examples:
-      | file          | http_post_status   | http_delete_status |
-      | user_001.dict | 204                | 204                |
+      | user | http_status   |
+      | u001 | 204           |
 
 
-  Scenario: Verify that creating the same user twice fails
-    {User} Given the user specified in <file> does not exist
-    {User} Then I can POST the user specified in <file> and get HTTP status code <http_post_status>
-    {User} And I cannot POST another user specified in <file> and get HTTP status code <http_post_error_status>
-    {User} And I can DELETE the user specified in <file> and get HTTP status code <http_delete_status> 
+  Scenario: Get existing user
+
+    {User} Given the user <user> exists
+    {User} Then I can get the user <user>
 
     Examples:
-      | file           | http_post_status | http_post_error_status | http_delete_status |
-      | user_001.dict  | 204              | 409                    | 204                |
+      | user |
+      | u001 |
+
+
+  Scenario: Delete user
+
+    {User} Given the user <user> exists
+    {User} Then I can delete the user <user> and the HTTP status code is <http_status>
+
+    Examples:
+      | user  | http_status |
+      | u001  | 204         |
+
+
+  Scenario: Get non-existing user
+
+    {User} Given the user <user> does not exist
+    {User} Then getting the user <user> fails and the HTTP status code is <http_status>
+
+    Examples:
+      | user  | http_status |
+      | u001  | 404         |
+
+
+  Scenario: Delete non-existing user
+
+    {User} Given the user <user> does not exist
+    {User} Then deleting the user <user> fails and the HTTP status code is <http_status>
+
+    Examples:
+      | user  | http_status |
+      | u001  | 404         |
+
+
+  Scenario: Create the same user twice
+
+    {User} Given the user <user> exists
+    {User} Then creating the user <user> again fails and the HTTP status code is <http_status>
+
+    Examples:
+      | user  | http_status |
+      | u001  | 409         |
+
+
+  Scenario: Get project list of a principal
+
+    {Util} Cleanup
+    {User} Given the user <u1> exists
+    {User} Given the user <u2> exists
+    {Project} Given the project <p1> exists
+    {Project} Given the project <p2> exists
+    {Project} Given the project <p3> exists
+    {User} Then the user <u1> sees projects <visible_u1> in his project list
+    {User} Then the user <u2> sees projects <visible_u2> in his project list
+    
+    Examples:
+      | u1   | u2   | p1        | p2        | p3        | visible_u1           | visible_u2 | 
+      | u001 | u002 |           |           |           |                      |            |
+      | u001 | u002 | p001_u001 |           | p003_u002 | p001_u001            | p003_u002  |
+      | u001 | u002 | p001_u001 | p002_u001 | p003_u002 | p001_u001, p002_u001 | p003_u002  |
+      
