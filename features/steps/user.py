@@ -80,10 +80,21 @@ def USER_verify_failure_for_duplicate_user(step, user_file, expected_status):
   assert 'reason' in bodyObject
   assert str(expected_status) == str(status)
 
-@step('{User} Then the user (.*) sees projects (.*) in his project list')
-def USER_check_project_list(step, user_file, project_list):
+@step('{User} Then the user (.*) is a principle of the projects (.*)')
+def USER_is_principle_of(step, user_file, project_list):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.get_projects_of_principal(user['userId'])
+  projects = json.loads(body)
+  if project_list.strip() == '':
+    num_visible = 0
+  else:
+    num_visible = len(project_list.split(','))
+  assert len(projects) == num_visible
+
+@step('{User} Then the user (.*) is a user of the projects (.*)')
+def USER_is_user_of(step, user_file, project_list):
+  user = eval(open(util.find_path_for_file(user_file)).read())
+  (status,body) = world.goldwrap.get_projects_of_user(user['userId'])
   projects = json.loads(body)
   if project_list.strip() == '':
     num_visible = 0

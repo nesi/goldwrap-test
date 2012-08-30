@@ -68,12 +68,30 @@ Feature: User
     {Project} Given the project <p1> exists
     {Project} Given the project <p2> exists
     {Project} Given the project <p3> exists
-    {User} Then the user <u1> sees projects <visible_u1> in his project list
-    {User} Then the user <u2> sees projects <visible_u2> in his project list
+    {User} {User} Then the user <u1> is a principle of the projects <visible_u1>
+    {User} {User} Then the user <u2> is a principle of the projects <visible_u2>
     
     Examples:
       | u1   | u2   | p1        | p2        | p3        | visible_u1           | visible_u2 | 
       | u001 | u002 |           |           |           |                      |            |
-      | u001 | u002 | p001_u001 |           | p003_u002 | p001_u001            | p003_u002  |
-      | u001 | u002 | p001_u001 | p002_u001 | p003_u002 | p001_u001, p002_u001 | p003_u002  |
+      | u001 | u002 | p001_u001 |           | p004_u002 | p001_u001            | p004_u002  |
+      | u001 | u002 | p001_u001 | p002_u001 | p004_u002 | p001_u001, p002_u001 | p004_u002  |
+
+
+  Scenario: Get project list of a user
+
+    {Util} Cleanup
+    {User} Given the user <u1> exists
+    {User} Given the user <u2> exists
+    {Project} Given the project <p1> exists
+    {Project} Given the project <p2> exists
+    {Project} Given the project <p3> exists
+    {User} {User} Then the user <u1> is a user of the projects <visible_u1>
+    {User} {User} Then the user <u2> is a user of the projects <visible_u2>
+    
+    Examples:
+      | u1   | u2   | p1        | p2        | p3        | visible_u1           | visible_u2           | 
+      | u001 | u002 |           |           |           |                      |                      |
+      | u001 | u002 | p002_u001 |           | p004_u002 | p002_u001            | p004_u002            |
+      | u001 | u002 | p002_u001 | p003_u001 | p004_u002 | p002_u001, p003_u001 | p003_u001, p004_u002 |
       

@@ -1,4 +1,4 @@
 {
-  "projectTitle" : "__ Automated Test Project 1",
-  "principal" : "automatedtestuser1", 
+  'projectTitle' : '__ Automated Test Project 1',
+  'principal' : 'automatedtestuser1', 
 }

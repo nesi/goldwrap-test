@@ -77,6 +77,15 @@ class GoldWrap:
     body = resp.read()
     return (status,body)
     
+  def get_projects_of_user(self, user_id):
+    conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
+    path = quote('%s/users/%s/projects' % (self._basepath, user_id))
+    conn.request('GET', path, headers=self._headers)
+    resp = conn.getresponse()
+    status = resp.status
+    body = resp.read()
+    return (status,body)
+    
   def get_project(self, project_id):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
     path = quote('%s/projects/%s' % (self._basepath, project_id))
