@@ -2,6 +2,18 @@ import json
 import util
 from lettuce import world, step
 
+@step('{User} Given the user (.*) exists')
+def USER_verify_user_exists(step, user_file):
+  user = eval(open(util.find_path_for_file(user_file)).read())
+  world.uids.add(user['userId'])
+  (status,body) = world.goldwrap.get_users()
+  users = json.loads(body)
+  for u in users:
+    if user['userId'] == u['userId']:
+      world.goldwrap.update_user(user)
+      return
+  world.goldwrap.create_user(user)
+
 @step('{User} Given the user (.*) does not exist')
 def USER_verify_user_not_exists(step, user_file):
   user = eval(open(util.find_path_for_file(user_file)).read())
@@ -10,38 +22,31 @@ def USER_verify_user_not_exists(step, user_file):
   for u in users:
     if user['userId'] == u['userId']:
       world.goldwrap.delete_user(user['userId'])
-
-@step('{User} Given the user (.*) exists')
-def USER_verify_user_exists(step, user_file):
-  user = eval(open(util.find_path_for_file(user_file)).read())
-  (status,body) = world.goldwrap.get_users()
-  users = json.loads(body)
-  for u in users:
-    if user['userId'] == u['userId']:
-      world.goldwrap.update_user(user)
-      return
-  world.goldwrap.create_user(user)
-  world.uids.add(user['userId'])
   
 @step('{User} Then I can create the user (.*) and the HTTP status code is (.*)')
 def USER_create_user(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
+  world.uids.add(user['userId'])
   (status, body) = world.goldwrap.create_user(user)
   assert str(expected_status) == str(status)
-  world.uids.add(user['userId'])
   
 @step('{User} Then I can get the user (.*)')
 def USER_get_user(step, user_file):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status, body) = world.goldwrap.get_user(user['userId'])
   u = json.loads(body)
-  for key in user.keys():
-    assert key in u
-    assert u[key] == user[key]
-  for key in u.keys():
-    assert key in user
-    assert u[key] == user[key]
-  world.goldwrap.delete_user(u['userId'])
+  assert util.simple_dict_equal(u, user)
+    
+@step('{User} Then I see user (.*) in the user list')
+def USER_get_user_in_list(step, user_file):
+  user = eval(open(util.find_path_for_file(user_file)).read())
+  (status, body) = world.goldwrap.get_users()
+  users = json.loads(body)
+  for u in users:
+    if u['userId'] == user['userId']:
+      assert util.simple_dict_equal(u, user)
+      return
+  assert False
     
 @step('{User} Then I can delete the user (.*) and the HTTP status code is (.*)')
 def USER_delete_user(step, user_file, expected_status):
@@ -66,9 +71,6 @@ def USER_verify_failure_for_getting_non_existent_user(step, user_file, expected_
 def USER_verify_failure_for_deleting_non_existent_user(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.delete_user(user['userId'])
-  bodyObject = json.loads(body)
-  assert 'errorCode' in bodyObject
-  assert 'reason' in bodyObject
   assert str(expected_status) == str(status)
   
 @step('{User} Then creating the user (.*) again fails and the HTTP status code is (.*)')

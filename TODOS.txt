@@ -1,3 +1,10 @@
 * perhaps change status code upon successful user creation from 204 to 201
 * perhaps change status code upon successful project creation from 200 to 201 (or at least make it consistent with user creation)
 * return the created user object upon creation of a user, just like it's done with projects
+
+
+################
+
+* why is return code on project creation 204?
+* users are not added anymore on project creation: Add tests for adding users to projects
+* deleting non-existing project: no body containing json error. status code should be error rather than 204 

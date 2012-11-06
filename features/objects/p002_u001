@@ -1,9 +1,0 @@
-{
-  "projectTitle" : "__ Automated Test Project 2",
-  "principal" : "automatedtestuser1", 
-  'users': [
-    {
-      'userId' : 'automatedtestuser1'
-    }
-  ]  
-}
