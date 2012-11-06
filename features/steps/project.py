@@ -22,6 +22,15 @@ def PROJECT_verify_project_not_exists(step, project_file):
   for p in projects:
     if project['projectId'] == p['projectId']:
       world.goldwrap.delete_project(p['projectId'])
+
+@step('{Project} Given the user (.*) is a member of project (.*)')
+def PROJECT_verify_user_member_of_project(step, user_file, project_file):
+  project = eval(open(util.find_path_for_file(project_file)).read())
+  user = eval(open(util.find_path_for_file(user_file)).read())
+  (status, body) = world.goldwrap.get_project(project)
+  project = json.loads(body)
+  assert 'users' in project
+  assert user['userId'] in project['users']
   
 @step('{Project} Given the user (.*) is not a member of project (.*)')
 def PROJECT_verify_user_not_member_of_project(step, user_file, project_file):

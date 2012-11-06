@@ -23,6 +23,11 @@ def USER_verify_user_not_exists(step, user_file):
     if user['userId'] == u['userId']:
       world.goldwrap.delete_user(user['userId'])
   
+@step('{User} If I delete the user (.*)')
+def USER_delete_user(step, user_file):
+  user = eval(open(util.find_path_for_file(user_file)).read())
+  (status,body) = world.goldwrap.delete_user()
+
 @step('{User} Then I can create the user (.*) and the HTTP status code is (.*)')
 def USER_create_user(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
@@ -49,7 +54,7 @@ def USER_get_user_in_list(step, user_file):
   assert False
     
 @step('{User} Then I can delete the user (.*) and the HTTP status code is (.*)')
-def USER_delete_user(step, user_file, expected_status):
+def USER_delete_user_and_check_status_code(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.delete_user(user['userId'])
   assert str(expected_status) == str(status)
