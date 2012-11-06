@@ -2,7 +2,7 @@ import json
 import util
 from lettuce import world, step
 
-@step('{User} Given the user (.*) exists')
+@step('{User} Given user (.*) exists')
 def USER_verify_user_exists(step, user_file):
   user = eval(open(util.find_path_for_file(user_file)).read())
   world.uids.add(user['userId'])
@@ -14,7 +14,7 @@ def USER_verify_user_exists(step, user_file):
       return
   world.goldwrap.create_user(user)
 
-@step('{User} Given the user (.*) does not exist')
+@step('{User} Given user (.*) does not exist')
 def USER_verify_user_not_exists(step, user_file):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.get_users()
@@ -23,19 +23,19 @@ def USER_verify_user_not_exists(step, user_file):
     if user['userId'] == u['userId']:
       world.goldwrap.delete_user(user['userId'])
   
-@step('{User} If I delete the user (.*)')
+@step('{User} If I delete user (.*)')
 def USER_delete_user(step, user_file):
   user = eval(open(util.find_path_for_file(user_file)).read())
-  (status,body) = world.goldwrap.delete_user()
+  (status,body) = world.goldwrap.delete_user(user['userId'])
 
-@step('{User} Then I can create the user (.*) and the HTTP status code is (.*)')
+@step('{User} Then I can create user (.*) and the HTTP status code is (.*)')
 def USER_create_user(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   world.uids.add(user['userId'])
   (status, body) = world.goldwrap.create_user(user)
   assert str(expected_status) == str(status)
   
-@step('{User} Then I can get the user (.*)')
+@step('{User} Then I can get user (.*)')
 def USER_get_user(step, user_file):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status, body) = world.goldwrap.get_user(user['userId'])
@@ -53,7 +53,7 @@ def USER_get_user_in_list(step, user_file):
       return
   assert False
     
-@step('{User} Then I can delete the user (.*) and the HTTP status code is (.*)')
+@step('{User} Then I can delete user (.*) and the HTTP status code is (.*)')
 def USER_delete_user_and_check_status_code(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.delete_user(user['userId'])
@@ -63,7 +63,7 @@ def USER_delete_user_and_check_status_code(step, user_file, expected_status):
   for u in users:
     assert user['userId'] != u['userId']
 
-@step('{User} Then getting the user (.*) fails and the HTTP status code is (.*)')
+@step('{User} Then getting user (.*) fails and the HTTP status code is (.*)')
 def USER_verify_failure_for_getting_non_existent_user(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.get_user(user['userId'])
@@ -72,13 +72,13 @@ def USER_verify_failure_for_getting_non_existent_user(step, user_file, expected_
   assert 'reason' in bodyObject
   assert str(expected_status) == str(status)
 
-@step('{User} Then deleting the user (.*) fails and the HTTP status code is (.*)')
+@step('{User} Then deleting user (.*) fails and the HTTP status code is (.*)')
 def USER_verify_failure_for_deleting_non_existent_user(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.delete_user(user['userId'])
   assert str(expected_status) == str(status)
   
-@step('{User} Then creating the user (.*) again fails and the HTTP status code is (.*)')
+@step('{User} Then creating user (.*) again fails and the HTTP status code is (.*)')
 def USER_verify_failure_for_duplicate_user(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.create_user(user)
@@ -87,7 +87,7 @@ def USER_verify_failure_for_duplicate_user(step, user_file, expected_status):
   assert 'reason' in bodyObject
   assert str(expected_status) == str(status)
 
-@step('{User} Then the user (.*) is a principle of the projects (.*)')
+@step('{User} Then user (.*) is a principle of the projects (.*)')
 def USER_is_principle_of(step, user_file, project_list):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.get_projects_of_principal(user['userId'])
@@ -98,7 +98,7 @@ def USER_is_principle_of(step, user_file, project_list):
     num_visible = len(project_list.split(','))
   assert len(projects) == num_visible
 
-@step('{User} Then the user (.*) is a user of the projects (.*)')
+@step('{User} Then user (.*) is a user of the projects (.*)')
 def USER_is_user_of(step, user_file, project_list):
   user = eval(open(util.find_path_for_file(user_file)).read())
   (status,body) = world.goldwrap.get_projects_of_user(user['userId'])

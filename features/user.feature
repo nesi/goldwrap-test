@@ -2,8 +2,8 @@ Feature: User
 
   Scenario: Create new user
   
-    {User} Given the user <u> does not exist
-    {User} Then I can create the user <u> and the HTTP status code is <http_status>
+    {User} Given user <u> does not exist
+    {User} Then I can create user <u> and the HTTP status code is <http_status>
 
     Examples:
       | u  | http_status   |
@@ -12,8 +12,8 @@ Feature: User
 
   Scenario: Get existing user
 
-    {User} Given the user <u> exists
-    {User} Then I can get the user <u>
+    {User} Given user <u> exists
+    {User} Then I can get user <u>
 
     Examples:
       | u  |
@@ -22,7 +22,7 @@ Feature: User
 
   Scenario: See existing user in user list
 
-    {User} Given the user <u> exists
+    {User} Given user <u> exists
     {User} Then I see user <u> in the user list
 
     Examples:
@@ -32,8 +32,8 @@ Feature: User
 
   Scenario: Delete user
 
-    {User} Given the user <u> exists
-    {User} Then I can delete the user <u> and the HTTP status code is <http_status>
+    {User} Given user <u> exists
+    {User} Then I can delete user <u> and the HTTP status code is <http_status>
 
     Examples:
       | u   | http_status |
@@ -42,8 +42,8 @@ Feature: User
 
   Scenario: Get non-existing user
 
-    {User} Given the user <u> does not exist
-    {User} Then getting the user <u> fails and the HTTP status code is <http_status>
+    {User} Given user <u> does not exist
+    {User} Then getting user <u> fails and the HTTP status code is <http_status>
 
     Examples:
       | u   | http_status |
@@ -52,8 +52,8 @@ Feature: User
 
   Scenario: Delete non-existing user
 
-    {User} Given the user <u> does not exist
-    {User} Then deleting the user <u> fails and the HTTP status code is <http_status>
+    {User} Given user <u> does not exist
+    {User} Then deleting user <u> fails and the HTTP status code is <http_status>
 
     Examples:
       | u   | http_status |
@@ -62,8 +62,8 @@ Feature: User
 
   Scenario: Create the same user twice
 
-    {User} Given the user <u> exists
-    {User} Then creating the user <u> again fails and the HTTP status code is <http_status>
+    {User} Given user <u> exists
+    {User} Then creating user <u> again fails and the HTTP status code is <http_status>
 
     Examples:
       | u   | http_status |

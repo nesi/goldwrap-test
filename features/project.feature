@@ -2,8 +2,8 @@ Feature: Project
 
   Scenario: Create new project
   
-    {Project} Given the project <p> does not exist
-    {Project} Then I can create the project <p> and the HTTP status code is <http_status>
+    {Project} Given project <p> does not exist
+    {Project} Then I can create project <p> and the HTTP status code is <http_status>
 
     Examples:
       | p    | http_status |
@@ -12,8 +12,8 @@ Feature: Project
 
   Scenario: Get existing project
 
-    {Project} Given the project <p> exists
-    {Project} Then I can get the project <p>
+    {Project} Given project <p> exists
+    {Project} Then I can get project <p>
 
     Examples:
       | p    |
@@ -22,7 +22,7 @@ Feature: Project
 
   Scenario: See existing project in project list
 
-    {Project} Given the project <p> exists
+    {Project} Given project <p> exists
     {Project} Then I see project <p> in the project list
 
     Examples:
@@ -32,8 +32,8 @@ Feature: Project
 
   Scenario: Delete existing project
 
-    {Project} Given the project <p> exists
-    {Project} Then I can delete the project <p> and the HTTP status code is <http_status>
+    {Project} Given project <p> exists
+    {Project} Then I can delete project <p> and the HTTP status code is <http_status>
 
     Examples:
       | p    | http_status |
@@ -42,8 +42,8 @@ Feature: Project
 
   Scenario: Get non-existing project
 
-    {Project} Given the project <p> does not exist
-    {Project} Then getting the project <p> fails and the HTTP status code is <http_status>
+    {Project} Given project <p> does not exist
+    {Project} Then getting project <p> fails and the HTTP status code is <http_status>
 
     Examples:
       | p    | http_status |
@@ -52,8 +52,8 @@ Feature: Project
 
   Scenario: Delete non-existing project
 
-    {Project} Given the project <p> does not exist
-    {Project} Then deleting the project <p> fails and the HTTP status code is <http_status>
+    {Project} Given project <p> does not exist
+    {Project} Then deleting project <p> fails and the HTTP status code is <http_status>
 
     Examples:
       | p    | http_status |
