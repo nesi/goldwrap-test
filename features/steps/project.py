@@ -63,6 +63,22 @@ def PROJECT_get_project(step, project_file):
   assert p['projectId'] == project['projectId']
   assert p['description'] == project['description']
 
+@step('{Project} Then I can update project (.*) with new description (.*)')
+def PROJECT_update_project_with_description(step, project_file, new_description):
+  project = eval(open(util.find_path_for_file(project_file)).read())
+  pid = project['projectId']
+  old_description = project['description']
+  project['description'] = new_description
+  (status, body) = world.goldwrap.update_project(project)
+  (status, body) = world.goldwrap.get_project(pid)
+  p = json.loads(body)
+  assert p['description'] == new_description
+  project['description'] = old_description
+  (status, body) = world.goldwrap.update_project(project)
+  (status, body) = world.goldwrap.get_project(pid)
+  p = json.loads(body)
+  assert p['description'] == old_description
+  
 @step('{Project} Then I see project (.*) in the project list')
 def PROJECT_get_project_in_list(step, project_file):
   project = eval(open(util.find_path_for_file(project_file)).read())

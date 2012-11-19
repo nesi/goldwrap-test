@@ -8,3 +8,6 @@
 * why is return code on project creation 204?
 * users are not added anymore on project creation: Add tests for adding users to projects
 * deleting non-existing project: no body containing json error. status code should be error rather than 204 
+* why is updating a project done on the /projects path, rather than on /projects/{projectid}
+* why is updating a user done on the /users path, rather than on /users/{userid}
+* i can't manage accounts via goldwrap. do i need an existing test account to create an allocation?

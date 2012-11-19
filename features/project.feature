@@ -30,6 +30,16 @@ Feature: Project
       | p1 |
 
 
+  Scenario: Update existing project
+
+    {Project} Given project <p> exists
+    {Project} Then I can update project <p> with new description <d>
+
+    Examples:
+      | p  | http_status | d                    |
+      | p1 | 204         | some new description |
+
+
   Scenario: Delete existing project
 
     {Project} Given project <p> exists

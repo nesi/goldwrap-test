@@ -1,4 +1,4 @@
-Feature: Add user to project
+Feature: Mapping users to projects
 
   Scenario: Add user to project
 

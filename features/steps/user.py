@@ -53,6 +53,22 @@ def USER_get_user_in_list(step, user_file):
       return
   assert False
     
+@step('{User} Then I can update user (.*) with new email (.*)')
+def USER_update_user_with_full_name(step, user_file, new_email):
+  user = eval(open(util.find_path_for_file(user_file)).read())
+  uid = user['userId']
+  old_email = user['email']
+  user['email'] = new_email
+  (status, body) = world.goldwrap.update_user(user)
+  (status, body) = world.goldwrap.get_user(uid)
+  u = json.loads(body)
+  assert u['email'] == new_email
+  user['email'] = old_email
+  (status, body) = world.goldwrap.update_user(user)
+  (status, body) = world.goldwrap.get_user(uid)
+  u = json.loads(body)
+  assert u['email'] == old_email
+
 @step('{User} Then I can delete user (.*) and the HTTP status code is (.*)')
 def USER_delete_user_and_check_status_code(step, user_file, expected_status):
   user = eval(open(util.find_path_for_file(user_file)).read())

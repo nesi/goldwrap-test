@@ -108,7 +108,7 @@ class GoldWrap:
 
   def update_project(self, project):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
-    path = quote('%s/projects/%s' % (self._basepath, project['projectId']))
+    path = quote('%s/projects' % (self._basepath))
     conn.request('POST', path, body=json.dumps(project), headers=self._json_headers)
     resp = conn.getresponse()
     status = resp.status

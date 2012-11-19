@@ -1,12 +1,17 @@
 # create project
 curl -X PUT -H "Content-Type: application/json" -d @project http://gold.dev.nesi.org.nz:8080/goldwrap/rest/goldwrap/projects
 
+# update project
+curl -X POST -H "Content-Type: application/json" -d @project_updated http://gold.dev.nesi.org.nz:8080/goldwrap/rest/goldwrap/projects
+
 # get project
 curl -H "Accept: application/json" http://gold.dev.nesi.org.nz:8080/goldwrap/rest/goldwrap/projects/__AUTOMATED_TEST_PROJECT_1__
 
 # create user
 curl -X PUT -H "Content-Type: application/json" -d @user http://gold.dev.nesi.org.nz:8080/goldwrap/rest/goldwrap/users
 
+# update user
+curl -X POST -H "Content-Type: application/json" -d @user_updated http://gold.dev.nesi.org.nz:8080/goldwrap/rest/goldwrap/users
 
 # add user to project
 curl -v -X POST -H "Content-Type: text/plain" -d @username http://gold.dev.nesi.org.nz:8080/goldwrap/rest/goldwrap/projects/__AUTOMATED_TEST_PROJECT_1__/add_user

@@ -1,8 +1,8 @@
 {
   "affiliation"     : "UoA",
-  "email"           : "automatedtestuser@nesi.org.nz",
+  "email"           : "newemail@nesi.org.nz",
   "fullName"        : "Thomas Researcher",
-  "organization"    : "The University of Auckland",
+  "organization"    : "The University of Chicago",
   "phone"           : "12345",
   "userId"          : "automatedtestuser1"
 }  

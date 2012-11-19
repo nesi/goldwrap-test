@@ -29,6 +29,15 @@ Feature: User
       | u  |
       | u1 |
 
+  Scenario: Update existing user
+
+    {User} Given user <u> exists
+    {User} Then I can update user <u> with new email <e>
+
+    Examples:
+      | u  | e                 |
+      | u1 | newemail@test.com |
+
 
   Scenario: Delete user
 
