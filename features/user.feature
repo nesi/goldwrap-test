@@ -32,11 +32,11 @@ Feature: User
   Scenario: Update existing user
 
     {User} Given user <u> exists
-    {User} Then I can update user <u> with new email <e>
+    {User} Then I can update user <u> with new email <e> and new phone <p>
 
     Examples:
-      | u  | e                 |
-      | u1 | newemail@test.com |
+      | u  | e                 | p                |
+      | u1 | newemail@test.com | +49 (0)6220-1673 |
 
 
   Scenario: Delete user

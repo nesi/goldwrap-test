@@ -44,7 +44,7 @@ class GoldWrap:
 
   def update_user(self, user):
     conn = httplib.HTTPConnection(self._host, self._port, self._timeout)
-    path = quote('%s/users/%s' % (self._basepath, user['userId']))
+    path = quote('%s/users' % (self._basepath))
     conn.request('POST', path, body=json.dumps(user), headers=self._json_headers)
     resp = conn.getresponse()
     status = resp.status
