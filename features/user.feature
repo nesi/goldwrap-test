@@ -29,14 +29,15 @@ Feature: User
       | u  |
       | u1 |
 
+
   Scenario: Update existing user
 
     {User} Given user <u> exists
-    {User} Then I can update user <u> with new email <e> and new phone <p>
+    {User} Then I can update user <u> with new email <e>, new phone <p>, and new organization <o>
 
     Examples:
-      | u  | e                 | p                |
-      | u1 | newemail@test.com | +49 (0)6220-1673 |
+      | u  | e                 | p                | o                    |
+      | u1 | newemail@test.com | +49 (0)6220-1673 | The New Organization |
 
 
   Scenario: Delete user

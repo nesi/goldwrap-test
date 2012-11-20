@@ -53,26 +53,31 @@ def USER_get_user_in_list(step, user_file):
       return
   assert False
     
-@step('{User} Then I can update user (.*) with new email (.*) and new phone (.*)')
-def USER_update_user_with_new_email(step, user_file, new_email, new_phone):
+@step('{User} Then I can update user (.*) with new email (.*), new phone (.*), and new organization (.*)')
+def USER_update_user_with_new_email(step, user_file, new_email, new_phone, new_org):
   user = eval(open(util.find_path_for_file(user_file)).read())
   uid = user['userId']
   old_email = user['email']
   old_phone = user['phone']
+  old_org = user['organization']
   user['email'] = new_email
   user['phone'] = new_phone
+  user['organization'] = new_org
   (status, body) = world.goldwrap.update_user(user)
   (status, body) = world.goldwrap.get_user(uid)
   u = json.loads(body)
   assert u['email'] == new_email
   assert u['phone'] == new_phone
+  assert u['organization'] == new_org
   user['email'] = old_email
   user['phone'] = old_phone
+  user['organization'] = old_org
   (status, body) = world.goldwrap.update_user(user)
   (status, body) = world.goldwrap.get_user(uid)
   u = json.loads(body)
   assert u['email'] == old_email
   assert u['phone'] == old_phone
+  assert u['organization'] == old_org
 
 @step('{User} Then I can delete user (.*) and the HTTP status code is (.*)')
 def USER_delete_user_and_check_status_code(step, user_file, expected_status):
