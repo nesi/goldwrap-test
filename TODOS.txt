@@ -1,7 +1,8 @@
 * perhaps change status code upon successful user creation from 204 to 201
 * perhaps change status code upon successful project creation from 200 to 201 (or at least make it consistent with user creation)
 * return the created user object upon creation of a user, just like it's done with projects
-
+* return error codes on errors rather than nothing
+* make body input types more consistent, rather than using a mix of plain text and xml/json
 
 ################
 
@@ -11,3 +12,10 @@
 * why is updating a project done on the /projects path, rather than on /projects/{projectid}
 * why is updating a user done on the /users path, rather than on /users/{userid}
 * i can't manage accounts via goldwrap. do i need an existing test account to create an allocation?
+* the following URLs are hard to test:
+  .../allocations[/...]: I can't create an allocation via goldwrap, and relying on an existing allocation seems brittle
+  .../organizations[/...]: I can't delete an organization via goldwrap. Constantly adding organizations when running tests pollutes the gold database
+  .../machines[/...]: I can't delete a machine via goldwrap. Constantly adding machines when running tests pollutes the gold database
+
+
+
